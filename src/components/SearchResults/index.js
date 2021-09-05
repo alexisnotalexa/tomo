@@ -1,16 +1,18 @@
 import React from 'react';
 import './SearchResults.css';
 
-const tempResults = ['Blah1', 'Blah2', 'Blah3', 'Blah4', 'Blah5'];
+const SearchResults = (props) => {
+    const { results = [] } = props;
 
-const SearchResults = () => {
+    if (!results.length) return null;
+
     return (
         <ul className="search-results">
-            {tempResults.map((result, index) => (
+            {results.map((result, index) => (
                 <li className={`result ${index === 0 && 'result--no-margin'}`}>
-                    <span className="result__badge">movie</span>
-                    <span className="result__title">{result}</span>
-                    <span className="result__year">1999</span>
+                    <span className="result__badge">{result['Type']}</span>
+                    <span className="result__title">{result['Title']}</span>
+                    <span className="result__year">{result['Year']}</span>
                 </li>
             ))}
         </ul>
