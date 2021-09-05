@@ -1,0 +1,44 @@
+.search-results {
+    width: 75%;
+    max-width: 700px;
+    background: whitesmoke;
+    border-radius: 0.5rem;
+    list-style-type: none;
+    padding: 1rem;
+}
+
+.result {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 4px;
+}
+
+.result:hover {
+    background: rgba(0, 0, 0, 0.075);
+}
+
+.result--no-margin {
+    margin: 0;
+}
+
+.result__badge {
+    background: cornflowerblue;
+    border-radius: 4px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    margin-right: 8px;
+    text-transform: uppercase;
+    padding: 4px;
+}
+
+.result__title {
+    font-weight: bold;
+}
+
+.result__year {
+    color: darkgray;
+    margin-left: 4px;
+}
