@@ -1,0 +1,14 @@
+.movie {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie__img {
+    border-radius: 1rem;
+    max-height: 250px;
+}
+
+.movie__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
