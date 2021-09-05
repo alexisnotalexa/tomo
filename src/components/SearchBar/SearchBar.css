@@ -31,6 +31,7 @@
 
 .search-bar__icon {
     color: gray;
+    cursor: pointer;
     font-size: 14px;
     margin-right: 4px;
 }

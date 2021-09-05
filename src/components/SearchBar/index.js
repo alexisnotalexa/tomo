@@ -9,10 +9,13 @@ const API_KEY = '&apikey=902755be';
 
 const SearchBar = (props) => {
     const { setMovie } = props;
+    const [inputFocused, setInputFocused] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [results, setResults] = useState([]);
+
+    const showSearchResults = !isLoading && results.length && inputFocused;
 
     const fetchData = () => {
         const fetchURL = `${URL}${encodeURI(searchQuery)}${API_KEY}`;
@@ -20,13 +23,13 @@ const SearchBar = (props) => {
         fetch(fetchURL)
             .then(response => response.json())
             .then(data => {
+                setIsLoading(false);
                 if (data['Search']) {
                     setResults(data['Search']);
                 } else {
                     setResults([]);
-                }
-                setIsLoading(false);
-                console.log(data['Search']);
+                } 
+                console.log(data);
             })
             .catch(error => {
                 setHasError(true);
@@ -35,24 +38,31 @@ const SearchBar = (props) => {
             });
     };
 
-    const onInputChange = (event) => {
+    const onChange = (event) => {
         setHasError(false);
         setSearchQuery(event.target.value);
+    };
+
+    const onKeyUp = (event) => {
+        if (event.code === 'Enter') fetchData();
     };
 
     return (
         <>
         <div className="search-bar">
-            <FontAwesomeIcon className="search-bar__icon" icon={faSearch} />
+            <FontAwesomeIcon className="search-bar__icon" icon={faSearch} onClick={fetchData} />
             <input 
                 className="search-bar__input" 
                 type="text" 
                 placeholder="Search movies..."
-                onChange={onInputChange} 
+                onChange={onChange}
+                onKeyUp={onKeyUp}
+                onFocus={() => setInputFocused(true)}
+                onBlur={() => setInputFocused(false)} 
             />
             <button className="search-bar__button" onClick={fetchData}>Submit</button>
         </div>
-        {!isLoading ? <SearchResults results={results} setMovie={setMovie} /> : null}
+        {showSearchResults ? <SearchResults results={results} setMovie={setMovie} /> : null}
         </>
     );
 };
