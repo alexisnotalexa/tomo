@@ -14,6 +14,7 @@ const SearchBar = () => {
                 type="text" 
                 placeholder="Search movies..." 
             />
+            <button className="search-bar__button">Submit</button>
         </div>
         <SearchResults />
         </>

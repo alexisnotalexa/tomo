@@ -10,6 +10,25 @@
     max-width: 700px;
 }
 
+.search-bar__button {
+    background: lightgray;
+    border: none;
+    border-radius: 1rem;
+    color: gray;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 8px 24px;
+    text-transform: uppercase;
+}
+
+.search-bar__button:hover {
+    background: gray;
+}
+
+.search-bar__button:active {
+    background: green;
+}
+
 .search-bar__icon {
     color: gray;
     font-size: 14px;
