@@ -50,19 +50,21 @@ const SearchBar = (props) => {
     return (
         <>
         <div className="search-bar">
-            <FontAwesomeIcon className="search-bar__icon" icon={faSearch} onClick={fetchData} />
-            <input 
-                className="search-bar__input" 
-                type="text" 
-                placeholder="Search movies..."
-                onChange={onChange}
-                onKeyUp={onKeyUp}
-                onFocus={() => setInputFocused(true)}
-                onBlur={() => setInputFocused(false)} 
-            />
-            <button className="search-bar__button" onClick={fetchData}>Submit</button>
+            <div className="search-bar__bar">
+                <FontAwesomeIcon className="search-bar__icon" icon={faSearch} onClick={fetchData} />
+                <input 
+                    className="search-bar__input" 
+                    type="text" 
+                    placeholder="Search movies..."
+                    onChange={onChange}
+                    onKeyUp={onKeyUp}
+                    onFocus={() => setInputFocused(true)}
+                    onBlur={() => setInputFocused(false)} 
+                />
+                <button className="search-bar__button" onClick={fetchData}>Submit</button>
+            </div>
+            {showSearchResults ? <SearchResults results={results} setMovie={setMovie} /> : null}
         </div>
-        {showSearchResults ? <SearchResults results={results} setMovie={setMovie} /> : null}
         </>
     );
 };

@@ -1,13 +1,17 @@
 .search-bar {
-    height: 3rem;
     width: 75%;
+    position: relative;
+    max-width: 700px;
+}
+
+.search-bar__bar {
+    height: 3rem;
     align-items: center;
     background: whitesmoke;
     border-radius: 1rem;
     color: gray;
     display: flex;
     padding: 0 1rem;
-    max-width: 700px;
 }
 
 .search-bar__button {

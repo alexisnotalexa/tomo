@@ -1,10 +1,15 @@
 .search-results {
-    width: 75%;
+    width: 100%;
     max-width: 700px;
     background: whitesmoke;
     border-radius: 0.5rem;
+    box-sizing: border-box;
     list-style-type: none;
     padding: 1rem;
+    position: absolute;
+    top: 55px;
+    margin: 0;
+    z-index: 1;
 }
 
 .result {
