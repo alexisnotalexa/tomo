@@ -7,7 +7,8 @@ import './SearchBar.css';
 const URL = 'https://www.omdbapi.com/?s=';
 const API_KEY = '&apikey=902755be';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+    const { setMovie } = props;
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -51,7 +52,7 @@ const SearchBar = () => {
             />
             <button className="search-bar__button" onClick={fetchData}>Submit</button>
         </div>
-        {!isLoading ? <SearchResults results={results} /> : null}
+        {!isLoading ? <SearchResults results={results} setMovie={setMovie} /> : null}
         </>
     );
 };
