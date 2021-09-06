@@ -1,14 +1,29 @@
 .movie {
     display: flex;
+    align-items: center;
     flex-direction: column;
+    margin-bottom: 1rem;
 }
 
 .movie__img {
     border-radius: 1rem;
-    max-height: 250px;
+    max-width: 150px;
+    margin-bottom: 0.5rem;
+}
+
+.movie__img--error {
+    height: 220px;
+    width: 150px;
+    background: lightgray;
+    border-radius: 1rem;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    margin-bottom: 0.5rem;
 }
 
 .movie__title {
-    font-size: 1.5rem;
-    font-weight: bold;
+    margin: 0;
 }
