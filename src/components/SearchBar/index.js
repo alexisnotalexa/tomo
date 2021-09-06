@@ -15,7 +15,7 @@ const SearchBar = (props) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [results, setResults] = useState([]);
 
-    const showSearchResults = !isLoading && results.length && inputFocused;
+    const showSearchResults = !isLoading && results.length && true;
 
     const fetchData = () => {
         const fetchURL = `${URL}${encodeURI(searchQuery)}${API_KEY}`;
@@ -50,8 +50,7 @@ const SearchBar = (props) => {
     return (
         <>
         <div className="search-bar">
-            <div className="search-bar__bar">
-                <FontAwesomeIcon className="search-bar__icon" icon={faSearch} onClick={fetchData} />
+            <div className={`search-bar__bar ${showSearchResults && 'search-bar__bar--show-results'}`}>
                 <input 
                     className="search-bar__input" 
                     type="text" 
@@ -61,7 +60,9 @@ const SearchBar = (props) => {
                     onFocus={() => setInputFocused(true)}
                     onBlur={() => setInputFocused(false)} 
                 />
-                <button className="search-bar__button" onClick={fetchData}>Submit</button>
+                <button className="search-bar__button" onClick={fetchData}>
+                    <FontAwesomeIcon icon={faSearch} />
+                </button>
             </div>
             {showSearchResults ? <SearchResults results={results} setMovie={setMovie} /> : null}
         </div>
