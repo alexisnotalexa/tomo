@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import SearchResults from '../SearchResults';
 import './SearchBar.css';
 
@@ -22,14 +22,17 @@ const SearchBar = (props) => {
         fetch(fetchURL)
             .then(response => response.json())
             .then(data => {
-                setIsLoading(false);
-                if (data['Search']) {
-                    setResults(data['Search']);
-                } else if (data['Error']) {
-                    setHasError(true);
-                } else {
-                    setResults([]);
-                }
+                // This setTimeout is to just show the loading state
+                setTimeout(() => {
+                    setIsLoading(false);
+                    if (data['Search']) {
+                        setResults(data['Search']);
+                    } else if (data['Error']) {
+                        setHasError(true);
+                    } else {
+                        setResults([]);
+                    }
+                }, 3000);
             })
             .catch(() => {
                 setHasError(true);
@@ -59,8 +62,8 @@ const SearchBar = (props) => {
                     onFocus={() => setShowResultsList(true)}
                     onKeyUp={onKeyUp}
                 />
-                <button className="search-bar__button" onClick={fetchData}>
-                    <FontAwesomeIcon icon={faSearch} />
+                <button className="search-bar__button" onClick={fetchData} disabled={isLoading}>
+                    {isLoading ? <FontAwesomeIcon icon={faCircleNotch} spin /> : <FontAwesomeIcon icon={faSearch} />}
                 </button>
             </div>
             {showSearchResults 
