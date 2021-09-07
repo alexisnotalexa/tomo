@@ -29,6 +29,7 @@ const SearchBar = (props) => {
                         setResults(data['Search']);
                     } else if (data['Error']) {
                         setHasError(true);
+                        setResults([]);
                     } else {
                         setResults([]);
                     }
@@ -51,7 +52,8 @@ const SearchBar = (props) => {
 
     return (
         <>
-        {hasError ? <span className="search-bar__error-msg">Oops!  Something went wrong.</span> : null}
+        {/* Not the best error message but something is better than nothing! */}
+        {hasError ? <span className="search-bar__error-msg">Oops!  That movie does not exist, search for something else.</span> : null}
         <div className="search-bar">
             <div className={`search-bar__bar ${showSearchResults && 'search-bar__bar--show-results'} ${hasError && 'search-bar__bar--error'}`}>
                 <input 

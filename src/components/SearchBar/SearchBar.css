@@ -38,6 +38,7 @@
 
 .search-bar__button:disabled {
     background: darkgray;
+    cursor: not-allowed;
 }
 
 .search-bar__button:hover {
