@@ -15,12 +15,15 @@
     padding: 0 1rem;
 }
 
+.search-bar__bar--error {
+    border: 1px solid red;
+}
+
 .search-bar__bar--show-results {
     border-radius: 1rem 1rem 0 0;
 }
 
 .search-bar__button {
-    /* background: lightgray; */
     background: slateblue;
     border: none;
     border-radius: 1rem;
@@ -33,12 +36,17 @@
 }
 
 .search-bar__button:hover {
-    /* background: gray; */
     background: darkslateblue;
 }
 
 .search-bar__button:active {
     background: #3b3565;
+}
+
+.search-bar__error-msg {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 4px;
 }
 
 .search-bar__input {

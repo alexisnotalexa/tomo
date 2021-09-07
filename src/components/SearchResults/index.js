@@ -17,7 +17,7 @@ const BadgeColors = {
 }
 
 const SearchResults = (props) => {
-    const { results = [], setMovie } = props;
+    const { results = [], setMovie, setShowResultsList } = props;
 
     const getBadgeColor = (type) => {
         switch(type) {
@@ -36,6 +36,7 @@ const SearchResults = (props) => {
 
     const onListClick = (result) => {
         setMovie(result);
+        setShowResultsList(false);
     };
 
     if (!results.length) return null;

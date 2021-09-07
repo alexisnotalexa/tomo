@@ -4,21 +4,20 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import SearchResults from '../SearchResults';
 import './SearchBar.css';
 
-const URL = 'https://www.omdbapi.com/?s=';
-const API_KEY = '&apikey=902755be';
+const generateURI = (searchQuery) => `https://www.omdbapi.com/?s=${encodeURI(searchQuery)}&apikey=902755be`;
 
 const SearchBar = (props) => {
     const { setMovie } = props;
-    const [inputFocused, setInputFocused] = useState(false);
+    const [showResultsList, setShowResultsList] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [results, setResults] = useState([]);
 
-    const showSearchResults = !isLoading && results.length && true;
+    const showSearchResults = !isLoading && results.length && showResultsList;
 
     const fetchData = () => {
-        const fetchURL = `${URL}${encodeURI(searchQuery)}${API_KEY}`;
+        const fetchURL = generateURI(searchQuery);
         setIsLoading(true);
         fetch(fetchURL)
             .then(response => response.json())
@@ -26,15 +25,15 @@ const SearchBar = (props) => {
                 setIsLoading(false);
                 if (data['Search']) {
                     setResults(data['Search']);
+                } else if (data['Error']) {
+                    setHasError(true);
                 } else {
                     setResults([]);
-                } 
-                console.log(data);
+                }
             })
-            .catch(error => {
+            .catch(() => {
                 setHasError(true);
                 setIsLoading(false);
-                console.log(error);
             });
     };
 
@@ -49,22 +48,27 @@ const SearchBar = (props) => {
 
     return (
         <>
+        {hasError ? <span className="search-bar__error-msg">Oops!  Something went wrong.</span> : null}
         <div className="search-bar">
-            <div className={`search-bar__bar ${showSearchResults && 'search-bar__bar--show-results'}`}>
+            <div className={`search-bar__bar ${showSearchResults && 'search-bar__bar--show-results'} ${hasError && 'search-bar__bar--error'}`}>
                 <input 
                     className="search-bar__input" 
                     type="text" 
                     placeholder="Search movies..."
                     onChange={onChange}
+                    onFocus={() => setShowResultsList(true)}
                     onKeyUp={onKeyUp}
-                    onFocus={() => setInputFocused(true)}
-                    onBlur={() => setInputFocused(false)} 
                 />
                 <button className="search-bar__button" onClick={fetchData}>
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </div>
-            {showSearchResults ? <SearchResults results={results} setMovie={setMovie} /> : null}
+            {showSearchResults 
+                ? <SearchResults 
+                    results={results} 
+                    setMovie={setMovie} 
+                    setShowResultsList={setShowResultsList} 
+                /> : null}
         </div>
         </>
     );
